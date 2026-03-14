@@ -1,0 +1,19 @@
+{
+    "name": "lab/documentation-lab",
+    "description": "Лабораторна робота 5 — документування коду",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "^3.4"
+    },
+    "scripts": {
+        "docs": "vendor/bin/phpdoc run -c phpdoc.xml",
+        "docs:clean": "rm -rf docs/phpdoc build/phpdoc-cache"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

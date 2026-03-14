@@ -1,0 +1,14 @@
+.hero {
+  position: relative;
+  min-height: 320px;
+  background: linear-gradient(135deg, #198754 0%, #0d5c38 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.15);
+  pointer-events: none;
+}

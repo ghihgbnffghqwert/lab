@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: Lab — Контактна форма та ендпоінти
+  description: |
+    Опис ендпоінтів, пов’язаних з контактною формою та подальшим розширенням API.
+    Контактна форма відправляє POST на `/actions/contact.php`.
+  version: 1.0.0
+  contact:
+    name: Lab
+
+servers:
+  - url: /
+    description: Корінь сайту
+
+paths:
+  /actions/contact.php:
+    post:
+      summary: Надіслати контактне повідомлення
+      description: Приймає дані форми з головної сторінки (секція Контакти). Зберігає заявку в БД та редіректить на головну з query-параметром.
+      operationId: submitContact
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactRequest'
+            examples:
+              example1:
+                summary: Приклад запиту
+                value:
+                  name: Іван Петренко
+                  email: ivan@example.com
+                  message: Доброго дня, цікавить консультація.
+      responses:
+        '302':
+          description: Редірект на головну сторінку з параметром ?contact=ok, ?contact=error або ?contact=invalid
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "/?contact=ok"
+
+components:
+  schemas:
+    ContactRequest:
+      type: object
+      required:
+        - name
+        - email
+        - message
+      properties:
+        name:
+          type: string
+          description: Ім'я відправника
+          example: Іван Петренко
+        email:
+          type: string
+          format: email
+          description: Електронна пошта
+          example: ivan@example.com
+        message:
+          type: string
+          description: Текст повідомлення
+          example: Доброго дня, цікавить консультація.

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpdocumentor
+    configVersion="3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.phpdoc.org"
+    xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
+>
+    <title>Lab — Документація коду</title>
+    <paths>
+        <output>docs/phpdoc</output>
+        <cache>build/phpdoc-cache</cache>
+    </paths>
+    <version number="1.0.0"/>
+    <settings>
+        <source>
+            <path>.</path>
+            <exclude>
+                <path>vendor</path>
+                <path>node_modules</path>
+                <path>build</path>
+                <path>docs/phpdoc</path>
+                <path>uploads</path>
+            </exclude>
+        </source>
+        <default-package-name>Lab</default-package-name>
+    </settings>
+</phpdocumentor>

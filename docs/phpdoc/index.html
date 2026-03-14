@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab — Документація коду (phpDocumentor)</title>
+  <style>body{font-family:sans-serif;max-width:900px;margin:2em auto;padding:0 1em;} pre{background:#f5f5f5;padding:1em;} code{font-size:0.9em;} a{color:#0d6efd;}</style>
+</head>
+<body>
+  <h1>Lab — Документація коду</h1>
+  <p>Згенеровано за PHPDoc-коментарями. Для повної генерації виконайте: <code>composer install && composer run-script docs</code>.</p>
+  <h2>Файли та елементи</h2>
+  <ul>
+    <li><strong>index.php</strong> — головна сторінка (лендінг)</li>
+    <li><strong>db.php</strong> — підключення до БД (глобальна змінна <code>$conn</code>)</li>
+    <li><strong>lib/helpers.php</strong> — функція <code>h(string $s): string</code> — екранування HTML</li>
+    <li><strong>actions/contact.php</strong> — обробник POST форми контактів</li>
+  </ul>
+  <h2>Функції</h2>
+  <ul>
+    <li><code>h($s)</code> — екранує HTML-спецсимволи для безпечного виводу (захист від XSS).</li>
+  </ul>
+  <p><em>Повна HTML-документація генерується phpDocumentor при виконанні <code>composer run-script docs</code>.</em></p>
+</body>
+</html>
