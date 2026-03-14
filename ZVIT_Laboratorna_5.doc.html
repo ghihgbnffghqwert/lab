@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Звіт з лабораторної роботи 5</title>
+<style>
+  body { font-family: 'Times New Roman', Times, serif; font-size: 14pt; line-height: 1.35; max-width: 21cm; margin: 2cm auto; padding: 0 1.5cm; }
+  h1 { font-size: 16pt; text-align: center; margin-top: 24pt; margin-bottom: 18pt; }
+  h2 { font-size: 14pt; margin-top: 14pt; margin-bottom: 8pt; }
+  p { margin: 0 0 6pt; text-align: justify; }
+  ul { margin: 6pt 0; padding-left: 1.5em; }
+  li { margin-bottom: 4pt; }
+  a { color: #0000FF; }
+  .meta { margin-bottom: 18pt; }
+  .note { font-size: 11pt; color: #666; margin-bottom: 12pt; }
+  table { border-collapse: collapse; width: 100%; margin: 10pt 0; }
+  th, td { border: 1px solid #000; padding: 6pt 8pt; text-align: left; font-size: 12pt; }
+  th { background: #f0f0f0; }
+  .sign { margin-top: 24pt; }
+</style>
+</head>
+<body>
+
+<p class="note"><strong>Як отримати файл Word:</strong> відкрийте цей файл у Microsoft Word (Файл → Відкрити), потім «Зберегти як» → «Документ Word (*.docx)».</p>
+
+<h1>ЗВІТ<br>з лабораторної роботи № 5</h1>
+
+<h2>Тема: Документування коду</h2>
+
+<p><strong>Мета роботи:</strong> ознайомитися із сучасними підходами та інструментами документування програмного коду, оволодіти практичними навичками створення якісної документації для власного проєкту з урахуванням особливостей обраної мови програмування (PHP) та використаного підходу.</p>
+
+<h2>Що зроблено</h2>
+<ul>
+  <li>Досліджено стандарти та рекомендації документування для PHP (PHPDoc); огляд інструментів автогенерації (phpDocumentor, Sami тощо).</li>
+  <li>Додано документацію до ключових елементів проєкту: <code>index.php</code>, <code>db.php</code>, <code>lib/helpers.php</code> (функція <code>h()</code>), <code>actions/contact.php</code>.</li>
+  <li>Оновлено README.md — опис того, що й як документувати, щоб усі, хто долучається до проєкту, дотримувалися єдиного підходу.</li>
+  <li>Встановлено та налаштовано інструмент автогенерації документації (phpDocumentor), створено інструкцію з генерації, згенеровано документацію та архів.</li>
+  <li>Документовано архітектуру та бізнес-логіку проєкту; створено специфікацію OpenAPI (Swagger) для ендпоінта контактної форми; налаштовано Swagger UI для інтерактивного відображення та перевірки прикладів.</li>
+  <li>Інтегровано генерацію документації з процесом збірки (composer-скрипти, phpdoc.xml); налаштовано CI/CD для автоматичної генерації документації (GitHub Actions).</li>
+</ul>
+
+<h2>Форма звіту</h2>
+
+<p><strong>1. Посилання на коміти, що додають документацію</strong></p>
+<ul>
+  <li>Репозиторій історія комітів: <a href="https://github.com/ghihgbnffghqwert/lab/commits/main">https://github.com/ghihgbnffghqwert/lab/commits/main</a></li>
+  <li>Коміт з усією документацією: <a href="https://github.com/ghihgbnffghqwert/lab/commit/ed7bc0ad1fc3aff7fb99b2d5a996023faed652cc">https://github.com/ghihgbnffghqwert/lab/commit/ed7bc0ad1fc3aff7fb99b2d5a996023faed652cc</a></li>
+</ul>
+
+<p><strong>2. Інструкція з генерації документації: docs/generate_docs.md</strong></p>
+<ul>
+  <li>Посилання у репозиторії: <a href="https://github.com/ghihgbnffghqwert/lab/blob/main/docs/generate_docs.md">https://github.com/ghihgbnffghqwert/lab/blob/main/docs/generate_docs.md</a></li>
+  <li>У ній описано: встановлення залежностей (composer install), команду генерації (composer run-script docs), відкриття результату (docs/phpdoc/index.html), очищення та інтеграцію з CI.</li>
+</ul>
+
+<p><strong>3. Згенерована документація окремим архівом</strong></p>
+<ul>
+  <li>Архів у репозиторії: <a href="https://github.com/ghihgbnffghqwert/lab/raw/main/docs-phpdoc.zip">https://github.com/ghihgbnffghqwert/lab/raw/main/docs-phpdoc.zip</a> (файл <code>docs-phpdoc.zip</code>)</li>
+  <li>Каталог зі згенерованою документацією в репо: <a href="https://github.com/ghihgbnffghqwert/lab/tree/main/docs/phpdoc">https://github.com/ghihgbnffghqwert/lab/tree/main/docs/phpdoc</a></li>
+</ul>
+
+<p><strong>4. Інтеграція з процесом збірки: відповідні файли конфігурації та скрипти</strong></p>
+<ul>
+  <li>Конфігурація phpDocumentor: <a href="https://github.com/ghihgbnffghqwert/lab/blob/main/phpdoc.xml">https://github.com/ghihgbnffghqwert/lab/blob/main/phpdoc.xml</a></li>
+  <li>Скрипти збірки (composer): <a href="https://github.com/ghihgbnffghqwert/lab/blob/main/composer.json">https://github.com/ghihgbnffghqwert/lab/blob/main/composer.json</a> (секція <code>scripts</code>: <code>docs</code>, <code>docs:clean</code>)</li>
+  <li>Workflow CI/CD для генерації документації: <a href="https://github.com/ghihgbnffghqwert/lab/blob/main/.github/workflows/docs.yml">https://github.com/ghihgbnffghqwert/lab/blob/main/.github/workflows/docs.yml</a></li>
+</ul>
+
+<p><strong>5. API документація (якщо застосовна): docs/api/*</strong></p>
+<ul>
+  <li>Специфікація OpenAPI: <a href="https://github.com/ghihgbnffghqwert/lab/blob/main/docs/api/openapi.yaml">https://github.com/ghihgbnffghqwert/lab/blob/main/docs/api/openapi.yaml</a></li>
+  <li>Swagger UI для інтерактивного відображення та тестування API: <a href="https://github.com/ghihgbnffghqwert/lab/blob/main/docs/swagger.html">https://github.com/ghihgbnffghqwert/lab/blob/main/docs/swagger.html</a></li>
+</ul>
+
+<p><strong>6. Посилання на розгорнуту документацію (якщо застосовно)</strong></p>
+<ul>
+  <li>Репозиторій проєкту (код і документація): <a href="https://github.com/ghihgbnffghqwert/lab">https://github.com/ghihgbnffghqwert/lab</a></li>
+  <li>Після налаштування GitHub Pages посилання на розгорнуту документацію може мати вигляд: <em>https://ghihgbnffghqwert.github.io/lab/</em> (залежить від налаштувань Pages).</li>
+</ul>
+
+<h2>Відповідність завданням</h2>
+<table>
+  <tr><th>Завдання</th><th>Виконання</th></tr>
+  <tr><td>Дослідити стандарти документування для PHP</td><td>Огляд у docs/STANDARDS_AND_TOOLS.md</td></tr>
+  <tr><td>Огляд інструментів автогенерації</td><td>Таблиця в docs/STANDARDS_AND_TOOLS.md, обрано phpDocumentor</td></tr>
+  <tr><td>Документація мінімум 3 ключових елементів</td><td>PHPDoc у index.php, db.php, lib/helpers.php, actions/contact.php</td></tr>
+  <tr><td>Модифікація README — що і як документувати</td><td>Розділ у README.md та docs/generate_docs.md</td></tr>
+  <tr><td>Встановлення та налаштування інструменту</td><td>phpDocumentor у composer.json, конфіг phpdoc.xml</td></tr>
+  <tr><td>Документація публічних інтерфейсів</td><td>Усі зазначені файли/функції описані PHPDoc</td></tr>
+  <tr><td>Генерація документації та архів</td><td>docs/phpdoc/, docs-phpdoc.zip</td></tr>
+  <tr><td>Інструкція з генерації</td><td>docs/generate_docs.md</td></tr>
+  <tr><td>OpenAPI (Swagger), Swagger UI</td><td>docs/api/openapi.yaml, docs/swagger.html</td></tr>
+  <tr><td>Перевірка інтерактивних прикладів</td><td>Swagger UI підключено до OpenAPI, приклади описані в специфікації</td></tr>
+  <tr><td>CI/CD для генерації документації</td><td>.github/workflows/docs.yml</td></tr>
+</table>
+
+<div class="sign">
+  <p>Підпис: _________________</p>
+  <p>Дата: «___» __________ 20___ р.</p>
+</div>
+
+</body>
+</html>

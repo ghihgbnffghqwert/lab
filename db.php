@@ -10,15 +10,24 @@
  * @see index.php
  */
 
-$conn = new mysqli(
-    getenv('DB_HOST') ?: 'localhost',
-    getenv('DB_USER') ?: 'root',
-    getenv('DB_PASS') ?: '',
-    getenv('DB_NAME') ?: 'lab'
-);
-
-if ($conn->connect_error) {
-    die('Помилка підключення: ' . $conn->connect_error);
+try {
+    $conn = new mysqli(
+        getenv('DB_HOST') ?: 'localhost',
+        getenv('DB_USER') ?: 'root',
+        getenv('DB_PASS') ?: '',
+        getenv('DB_NAME') ?: 'lab'
+    );
+    if ($conn->connect_error) {
+        $conn = null;
+        if (!defined('DEMO_MODE')) {
+            define('DEMO_MODE', true);
+        }
+    } else {
+        $conn->set_charset('utf8mb4');
+    }
+} catch (mysqli_sql_exception $e) {
+    $conn = null;
+    if (!defined('DEMO_MODE')) {
+        define('DEMO_MODE', true);
+    }
 }
-
-$conn->set_charset('utf8mb4');

@@ -15,9 +15,51 @@ define('DIR', __DIR__);
 require DIR . '/db.php';
 require DIR . '/lib/helpers.php';
 
-$site = $conn->query("SELECT * FROM settings LIMIT 1")->fetch_assoc();
-$services = $conn->query("SELECT * FROM services");
-$news = $conn->query("SELECT * FROM news ORDER BY date DESC");
+if (defined('DEMO_MODE') && DEMO_MODE && !$conn) {
+    $site = [
+        'site_name' => 'Лабовий сайт',
+        'hero_title' => 'Ласкаво просимо',
+        'hero_subtitle' => 'Документування коду — лабораторна робота 5',
+        'about_text' => 'Демонстрація лендінгу з секціями: про компанію, послуги, новини, контакти, чат.',
+        'about_small' => 'Режим без БД (демо).',
+        'about_image' => 'public/no-image.png',
+    ];
+    $services = new class implements Iterator {
+        private $rows = [
+            ['title' => 'Консультація', 'description' => 'Опис послуги 1.', 'image' => ''],
+            ['title' => 'Розробка', 'description' => 'Опис послуги 2.', 'image' => ''],
+            ['title' => 'Підтримка', 'description' => 'Опис послуги 3.', 'image' => ''],
+        ];
+        private $i = 0;
+        public function fetch_assoc() { $r = $this->rows[$this->i++] ?? null; return $r; }
+        public function rewind() { $this->i = 0; }
+        public function current() { return $this->rows[$this->i] ?? null; }
+        public function key() { return $this->i; }
+        public function next() { $this->i++; }
+        public function valid() { return isset($this->rows[$this->i]); }
+    };
+    $newsDate = date('Y-m-d');
+    $news = new class($newsDate) implements Iterator {
+        private $rows;
+        private $i = 0;
+        public function __construct($d) {
+            $this->rows = [
+                ['title' => 'Новина 1', 'text' => 'Текст новини.', 'date' => $d, 'image' => 'no-image.png'],
+                ['title' => 'Новина 2', 'text' => 'Ще одна новина.', 'date' => $d, 'image' => 'no-image.png'],
+            ];
+        }
+        public function fetch_assoc() { $r = $this->rows[$this->i++] ?? null; return $r; }
+        public function rewind() { $this->i = 0; }
+        public function current() { return $this->rows[$this->i] ?? null; }
+        public function key() { return $this->i; }
+        public function next() { $this->i++; }
+        public function valid() { return isset($this->rows[$this->i]); }
+    };
+} else {
+    $site = $conn->query("SELECT * FROM settings LIMIT 1")->fetch_assoc();
+    $services = $conn->query("SELECT * FROM services");
+    $news = $conn->query("SELECT * FROM news ORDER BY date DESC");
+}
 ?>
 <!DOCTYPE html>
 <html lang="uk">
@@ -109,7 +151,11 @@ $news = $conn->query("SELECT * FROM news ORDER BY date DESC");
       <?php while ($n = $news->fetch_assoc()): ?>
       <div class="col-md-4">
         <div class="card h-100 shadow-sm">
+          <?php if (!empty($n['image'])): ?>
           <img src="uploads/news/<?= h($n['image']) ?>" class="news-thumb" alt="<?= h($n['title']) ?>">
+          <?php else: ?>
+          <img src="public/no-image.png" class="news-thumb" alt="<?= h($n['title']) ?>">
+          <?php endif; ?>
           <div class="card-body">
             <h5 class="card-title"><?= h($n['title']) ?></h5>
             <div class="text-muted small mb-2"><?= h($n['date']) ?></div>
